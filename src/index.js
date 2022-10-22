@@ -10,15 +10,15 @@ async function getExchange(currency, amountUSD) {
   if (response.result) {
     printElements(response, amountUSD);
   } else {
-    printError(response, amountUSD);
+    printError(response);
   }
 }
 
 // UI Logic
 
-function printElements(response, currency, amountUSD) {
-  document.querySelector('#showResponse').innerText = `The exchange rate from USD to ${currency} is ${response.result}. Based on that rate,
-  $${amountUSD} is equal to ${response.conversion_result} ${currency}.`;
+function printElements(response, currency) {
+  document.querySelector('#showResponse').innerText = `The exchange rate from USD to ${response["target_code"]} is 1 to ${response.conversion_rate}. Based on that rate,
+  ${currency} USD is equal to ${response.conversion_result} ${response["target_code"]}.`;
 }
 
 function printError(currency, error) {
@@ -27,9 +27,8 @@ function printError(currency, error) {
 
 function handleFormSubmission(event) {
   event.preventDefault();
-  const currency = document.getElementById('#currencies');
+  const currency = document.querySelector('#currencies').value;
   const amountUSD = document.querySelector('#amountUSD').value;
-  document.getElementById('#currencies').value = null;
   getExchange(currency, amountUSD);
 }
 
