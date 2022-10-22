@@ -16,9 +16,9 @@ async function getExchange(currency, amountUSD) {
 
 // UI Logic
 
-function printElements(currency, amountUSD) {
+function printElements(response, currency, amountUSD) {
   document.querySelector('#showResponse').innerText = `The exchange rate from USD to ${currency} is ${response.result}. Based on that rate,
-  $${amountUSD} is equal to ${response.converstion_result} ${currency}.`;
+  $${amountUSD} is equal to ${response.conversion_result} ${currency}.`;
 }
 
 function printError(currency, error) {
